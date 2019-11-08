@@ -26,9 +26,8 @@ function SignUp() {
         password: password
       })
       .then(res => {
-        console.log(res);
         if (res.data) {
-          console.log("Sign-UpSuccessful\n");
+          console.log("Sign-Up Successful\n");
           console.log(res.data);
           //   redirectTo("/login");
         } else {
