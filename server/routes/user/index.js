@@ -4,7 +4,6 @@ const passport = require("../../passport");
 
 router.post("/", (req, res) => {
   const { username, password } = req.body;
-  console.log("HERE IT IS");
   console.log(username, password);
 
   User.findOne({ username: username })
@@ -49,23 +48,23 @@ router.post(
   }
 );
 
-router.get("/", (req, res, next) => {
-  console.log("===== user!!======");
-  console.log(req.user);
-  if (req.user) {
-    res.json({ user: req.user });
-  } else {
-    res.json({ user: null });
-  }
-});
+// router.get("/", (req, res, next) => {
+//   console.log("===== user!!======");
+//   console.log(req.user);
+//   if (req.user) {
+//     res.json({ user: req.user });
+//   } else {
+//     res.json({ user: null });
+//   }
+// });
 
-router.post("/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    res.send({ msg: "logging out" });
-  } else {
-    res.send({ msg: "no user to log out" });
-  }
-});
+// router.post("/logout", (req, res) => {
+//   if (req.user) {
+//     req.logout();
+//     res.send({ msg: "logging out" });
+//   } else {
+//     res.send({ msg: "no user to log out" });
+//   }
+// });
 
 module.exports = router;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 function SignUp() {
@@ -29,7 +30,7 @@ function SignUp() {
         if (res.data) {
           console.log("Sign-Up Successful\n");
           console.log(res.data);
-          //   redirectTo("/login");
+          return <Redirect to="/login" />;
         } else {
           console.log("Error With Sign-Up");
         }

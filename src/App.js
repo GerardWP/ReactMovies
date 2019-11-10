@@ -1,25 +1,66 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+// Components
 import SignUp from "./components/SignUp";
+import LogIn from "./components/LogInForm";
+import Home from "./components/Home";
+import Nav from "./components/Nav";
 
 function App() {
+  const [username, setUsername] = useState(null);
+  const [loggedIn, setLogin] = useState(false);
+
+  useEffect(() => getUser(), []);
+
+  const updateUser = userObject => {
+    console.log(userObject);
+    setLogin(userObject.loggedIn);
+    setUsername(userObject.username);
+    // / this.setState(userObject)
+  };
+
+  const getUser = () => {
+    axios.get("/user/").then(response => {
+      console.log("Get user response: ");
+      console.log(response.data);
+      if (response.data.user) {
+        console.log("Get User: There is a user saved in the server session: ");
+        setLogin(true);
+        setUsername(response.data.user.username);
+      } else {
+        console.log("Get user: no user");
+        setLogin(false);
+        setUsername(null);
+      }
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <SignUp />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Nav updateUser={updateUser} loggedIn={loggedIn} />
+        {/* {username ? <h1>username</h1> : <h2>no usrname</h2>} */}
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            path="/login"
+            render={props => <LogIn {...props} updateUser={updateUser} />}
+          />
+          <Route path="/signup" component={SignUp} />
+        </Switch>
+      </Router>
     </div>
   );
 }
 
 export default App;
+
+// {/* greet user if logged in: */}
+// {loggedIn ? (
+//   <p>Join the party, {username}!</p>
+// ) : (
+//   <p>Log in if you want</p>
+// )}
+// {/* Routes to different components */}

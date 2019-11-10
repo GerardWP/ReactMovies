@@ -35,7 +35,7 @@ function LogIn(props) {
             username: response.data.username
           });
           // update the state to redirect to home
-          setRedirect("/");
+          //   setRedirect("/");
         }
       })
       .catch(error => {
@@ -101,3 +101,5 @@ function LogIn(props) {
     );
   }
 }
+
+export default LogIn;
