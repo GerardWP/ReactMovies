@@ -21,7 +21,7 @@ function SignUp() {
     console.log("Password:\n" + password);
 
     axios
-      .post("/", {
+      .post("/user", {
         username: username,
         password: password
       })

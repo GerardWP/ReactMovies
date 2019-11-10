@@ -19,7 +19,7 @@
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "NODE_ENV=production node server/server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
