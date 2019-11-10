@@ -1,12 +1,8 @@
-const express = require("express");
-const router = express.Router();
+const router = require("express").Router();
+// const User = require("../database/models/user");
+// const passport = require("../passport");
+const userRoutes = require("./user");
 
-router.post("/", (req, res) => {
-  console.log("user signup");
-  if (req.body) {
-    console.log("i think it worked!");
-    console.log(req.body);
-  } else console.log("it didnt work");
-});
+router.use("/user", userRoutes);
 
 module.exports = router;

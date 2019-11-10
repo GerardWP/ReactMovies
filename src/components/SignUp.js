@@ -21,14 +21,13 @@ function SignUp() {
     console.log("Password:\n" + password);
 
     axios
-      .post("/", {
+      .post("/user", {
         username: username,
         password: password
       })
       .then(res => {
-        console.log(res);
         if (res.data) {
-          console.log("Sign-UpSuccessful\n");
+          console.log("Sign-Up Successful\n");
           console.log(res.data);
           //   redirectTo("/login");
         } else {
