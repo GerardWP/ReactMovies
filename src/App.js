@@ -15,26 +15,29 @@ function App() {
   useEffect(() => getUser(), []);
 
   const updateUser = userObject => {
-    console.log(userObject);
     setLogin(userObject.loggedIn);
     setUsername(userObject.username);
-    // / this.setState(userObject)
   };
 
   const getUser = () => {
-    axios.get("/user/").then(response => {
-      console.log("Get user response: ");
-      console.log(response.data);
-      if (response.data.user) {
-        console.log("Get User: There is a user saved in the server session: ");
-        setLogin(true);
-        setUsername(response.data.user.username);
-      } else {
-        console.log("Get user: no user");
-        setLogin(false);
-        setUsername(null);
-      }
-    });
+    axios
+      .get("/user/")
+      .then(response => {
+        console.log("Get user response: ");
+        console.log(response.data);
+        if (response.data.user) {
+          console.log(
+            "Get User: There is a user saved in the server session: "
+          );
+          setLogin(true);
+          setUsername(response.data.user.username);
+        } else {
+          console.log("Get user: no user");
+          setLogin(false);
+          setUsername(null);
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   return (

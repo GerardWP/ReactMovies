@@ -25,14 +25,14 @@ function LogIn(props) {
         username: username,
         password: password
       })
-      .then(response => {
+      .then(res => {
         console.log("login response: ");
-        console.log(response);
-        if (response.status === 200) {
+        console.log(res);
+        if (res.status === 200) {
           // update App.js state
           props.updateUser({
             loggedIn: true,
-            username: response.data.username
+            username: res.data.username
           });
           // update the state to redirect to home
           //   setRedirect("/");
