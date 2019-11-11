@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 8080;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(routes);
-
 // Sessions
 app.use(
   session({
@@ -25,6 +23,8 @@ app.use(
 // Passport
 app.use(passport.initialize());
 app.use(passport.session()); // calls serializeUser and deserializeUser
+
+app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.resolve(__dirname, "../build")));
