@@ -15,6 +15,9 @@ function App() {
   useEffect(() => getUser(), []);
 
   const updateUser = userObject => {
+    console.log(userObject);
+    // console.log(userObject.loggedIn);
+    // console.log(userObject.username);
     setLogin(userObject.loggedIn);
     setUsername(userObject.username);
   };

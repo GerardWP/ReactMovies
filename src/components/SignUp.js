@@ -5,6 +5,11 @@ import axios from "axios";
 function SignUp() {
   const [username, updateUsername] = useState("");
   const [password, updatePassword] = useState("");
+  const [redirect, setRedirect] = useState(false);
+
+  const successRedirect = () => {
+    setRedirect(true);
+  };
 
   const handleInputChange = event => {
     const { name, value } = event.target;
@@ -30,7 +35,7 @@ function SignUp() {
         if (res.data) {
           console.log("Sign-Up Successful\n");
           console.log(res.data);
-          return <Redirect to="/login" />;
+          successRedirect();
         } else {
           console.log("Error With Sign-Up");
         }
@@ -38,31 +43,35 @@ function SignUp() {
       .catch(error => console.log("Server error\n" + error));
   };
 
-  return (
-    <div>
-      <form>
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            name="username"
-            onChange={handleInputChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            name="password"
-            onChange={handleInputChange}
-          />
-        </label>
-        <input type="submit" value="Submit" onClick={handleSubmit} />
-      </form>
-    </div>
-  );
+  if (redirect) {
+    return <Redirect to="/" />;
+  } else {
+    return (
+      <div>
+        <form>
+          <label>
+            Username:
+            <input
+              type="text"
+              value={username}
+              name="username"
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Password:
+            <input
+              type="password"
+              value={password}
+              name="password"
+              onChange={handleInputChange}
+            />
+          </label>
+          <input type="submit" value="Submit" onClick={handleSubmit} />
+        </form>
+      </div>
+    );
+  }
 }
 
 export default SignUp;

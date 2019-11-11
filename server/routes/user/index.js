@@ -4,6 +4,7 @@ const passport = require("../../passport");
 
 router.post("/", (req, res) => {
   const { username, password } = req.body;
+  console.log("Saving User:\n");
   console.log(username, password);
 
   User.findOne({ username: username })
@@ -46,22 +47,6 @@ router.post(
     res.send(userInfo);
   }
 );
-
-// router.post(
-//   "/login",
-//   (req, res) => {
-//     console.log("routes/user.js, login, req.body: ");
-//     console.log(req.body);
-//   },
-//   passport.authenticate("local"),
-//   (req, res) => {
-//     console.log("logged in", req.user);
-//     var userInfo = {
-//       username: req.user.username
-//     };
-//     res.send(userInfo);
-//   }
-// );
 
 router.get("/", (req, res) => {
   console.log("===== user!!======");

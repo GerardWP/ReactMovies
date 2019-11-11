@@ -5,6 +5,8 @@ import axios from "axios";
 import "../App.css";
 
 function Nav(props) {
+  const loggedIn = props.loggedIn;
+
   const logOut = event => {
     event.preventDefault();
     console.log("logging out");
@@ -24,9 +26,8 @@ function Nav(props) {
       });
   };
 
-  const loggedIn = props.loggedIn;
-  console.log("navbar render, props: ");
-  console.log(props);
+  //   console.log("navbar render, props: ");
+  //   console.log(props);
 
   return (
     <div>
