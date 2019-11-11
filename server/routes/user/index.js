@@ -32,21 +32,13 @@ router.post("/", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/home"
-  }),
-  (req, res) => {
-    console.log("MADE IT HERE");
-    console.log("logged in", req.user);
-    var userInfo = {
-      username: req.user.username
-    };
-    res.send(userInfo);
-  }
-);
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log("logged in", req.user);
+  var userInfo = {
+    username: req.user.username
+  };
+  res.send(userInfo);
+});
 
 router.get("/", (req, res) => {
   console.log("===== user!!======");
@@ -58,13 +50,13 @@ router.get("/", (req, res) => {
   }
 });
 
-// router.post("/logout", (req, res) => {
-//   if (req.user) {
-//     req.logout();
-//     res.send({ msg: "logging out" });
-//   } else {
-//     res.send({ msg: "no user to log out" });
-//   }
-// });
+router.post("/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    res.send({ msg: "logging out" });
+  } else {
+    res.send({ msg: "no user to log out" });
+  }
+});
 
 module.exports = router;

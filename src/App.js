@@ -46,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Nav updateUser={updateUser} loggedIn={loggedIn} />
+        <Nav updateUser={updateUser} loggedIn={loggedIn} username={username} />
         {/* {username ? <h1>username</h1> : <h2>no usrname</h2>} */}
         <Switch>
           <Route exact path="/" component={Home} />

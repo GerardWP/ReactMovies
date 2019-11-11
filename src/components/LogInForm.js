@@ -19,15 +19,12 @@ function LogIn(props) {
   const handleSubmit = event => {
     event.preventDefault();
     console.log("handleSubmit - running");
-
     axios
       .post("/user/login", {
         username: username,
         password: password
       })
       .then(res => {
-        console.log("login response: ");
-        console.log(res);
         if (res.status === 200) {
           // update App.js state
           props.updateUser({
