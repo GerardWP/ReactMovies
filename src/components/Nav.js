@@ -5,6 +5,10 @@ import axios from "axios";
 import "../App.css";
 
 function Nav(props) {
+  console.log("Nav props:");
+  console.log(props);
+  const loggedIn = props.loggedIn;
+
   const logOut = event => {
     event.preventDefault();
     console.log("logging out");
@@ -24,10 +28,6 @@ function Nav(props) {
       });
   };
 
-  const loggedIn = props.loggedIn;
-  console.log("navbar render, props: ");
-  console.log(props);
-
   return (
     <div>
       <header className="navbar App-header" id="nav-container">
@@ -41,6 +41,7 @@ function Nav(props) {
               >
                 <span className="text-secondary">logout</span>
               </Link>
+              <p>Welcome, {props.username}!</p>
             </section>
           ) : (
             <section className="navbar-section">

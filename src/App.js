@@ -15,6 +15,9 @@ function App() {
   useEffect(() => getUser(), []);
 
   const updateUser = userObject => {
+    console.log(userObject);
+    // console.log(userObject.loggedIn);
+    // console.log(userObject.username);
     setLogin(userObject.loggedIn);
     setUsername(userObject.username);
   };
@@ -43,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Nav updateUser={updateUser} loggedIn={loggedIn} />
+        <Nav updateUser={updateUser} loggedIn={loggedIn} username={username} />
         {/* {username ? <h1>username</h1> : <h2>no usrname</h2>} */}
         <Switch>
           <Route exact path="/" component={Home} />

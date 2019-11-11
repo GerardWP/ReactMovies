@@ -4,6 +4,7 @@ const passport = require("../../passport");
 
 router.post("/", (req, res) => {
   const { username, password } = req.body;
+  console.log("Saving User:\n");
   console.log(username, password);
 
   User.findOne({ username: username })
@@ -31,37 +32,13 @@ router.post("/", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/home"
-  }),
-  (req, res) => {
-    console.log("MADE IT HERE");
-    console.log("logged in", req.user);
-    var userInfo = {
-      username: req.user.username
-    };
-    res.send(userInfo);
-  }
-);
-
-// router.post(
-//   "/login",
-//   (req, res) => {
-//     console.log("routes/user.js, login, req.body: ");
-//     console.log(req.body);
-//   },
-//   passport.authenticate("local"),
-//   (req, res) => {
-//     console.log("logged in", req.user);
-//     var userInfo = {
-//       username: req.user.username
-//     };
-//     res.send(userInfo);
-//   }
-// );
+router.post("/login", passport.authenticate("local"), (req, res) => {
+  console.log("logged in", req.user);
+  var userInfo = {
+    username: req.user.username
+  };
+  res.send(userInfo);
+});
 
 router.get("/", (req, res) => {
   console.log("===== user!!======");
@@ -73,13 +50,13 @@ router.get("/", (req, res) => {
   }
 });
 
-// router.post("/logout", (req, res) => {
-//   if (req.user) {
-//     req.logout();
-//     res.send({ msg: "logging out" });
-//   } else {
-//     res.send({ msg: "no user to log out" });
-//   }
-// });
+router.post("/logout", (req, res) => {
+  if (req.user) {
+    req.logout();
+    res.send({ msg: "logging out" });
+  } else {
+    res.send({ msg: "no user to log out" });
+  }
+});
 
 module.exports = router;

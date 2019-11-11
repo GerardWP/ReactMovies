@@ -5,7 +5,7 @@ import axios from "axios";
 function LogIn(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [redirectTo, setRedirect] = useState(null);
+  const [redirect, setRedirect] = useState(false);
 
   const handleChange = event => {
     const { name, value } = event.target;
@@ -19,23 +19,20 @@ function LogIn(props) {
   const handleSubmit = event => {
     event.preventDefault();
     console.log("handleSubmit - running");
-
     axios
       .post("/user/login", {
         username: username,
         password: password
       })
       .then(res => {
-        console.log("login response: ");
-        console.log(res);
         if (res.status === 200) {
           // update App.js state
           props.updateUser({
             loggedIn: true,
-            username: res.data.username
+            username: username
           });
           // update the state to redirect to home
-          //   setRedirect("/");
+          setRedirect(true);
         }
       })
       .catch(error => {
@@ -44,8 +41,8 @@ function LogIn(props) {
       });
   };
 
-  if (redirectTo) {
-    return <Redirect to={{ pathname: redirectTo }} />;
+  if (redirect) {
+    return <Redirect to="/" />;
   } else {
     return (
       <div>
