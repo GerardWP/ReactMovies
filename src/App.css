@@ -20,3 +20,24 @@
 .App-link {
   color: #09d3ac;
 }
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signUpForm form {
+  display: flex;
+  flex-direction: column;
+  margin: 25px auto;
+}
+
+.signUpForm form label {
+  margin-bottom: 15px;
+}
+
+.signUpForm span {
+  font-size: 0.7em;
+  color: rgb(250, 57, 57);
+}

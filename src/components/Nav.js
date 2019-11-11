@@ -14,9 +14,8 @@ function Nav(props) {
     console.log("logging out");
     axios
       .post("/user/logout")
-      .then(response => {
-        console.log(response.data);
-        if (response.status === 200) {
+      .then(res => {
+        if (res.status === 200) {
           props.updateUser({
             loggedIn: false,
             username: null
