@@ -6,19 +6,28 @@
   height: 40vmin;
 }
 
-.App-header {
+.appHeader {
   background-color: #282c34;
-  min-height: 100vh;
+  padding: 0 40px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  justify-content: space-between;
   color: white;
+  position: relative;
+  z-index: 100;
+  height: 80px;
 }
 
-.App-link {
-  color: #09d3ac;
+header h1 {
+  margin: 0;
+  /* font-size: em; */
+}
+
+.appHeader .menuBtn {
+  color: #fff;
+  /* font-size: 0.6em; */
+  text-transform: uppercase;
+  margin-left: 15px;
 }
 
 .signUpForm {
@@ -40,4 +49,65 @@
 .signUpForm span {
   font-size: 0.7em;
   color: rgb(250, 57, 57);
+}
+.homePge {
+  background: #eee;
+  height: 100vh;
+  padding: 15px;
+}
+
+.searchBar {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 30px;
+  display: flex;
+  background: grey;
+  flex: 1;
+  height: 50px;
+  transition: 200ms ease-in;
+}
+
+.searchLogged {
+  top: 80px !important;
+}
+
+.searchBar input {
+  flex: 1;
+  border-radius: 0 !important;
+  background-color: #59aaba;
+  border: none;
+  font-size: 1.8em;
+  color: #fff;
+  padding: 0 15px;
+  height: 100%;
+}
+
+.searchBar input::placeholder {
+  color: rgba(255, 255, 255, 0.904);
+  opacity: 1; /* Firefox */
+}
+
+.searchBar input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.904);
+}
+
+.searchBar input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.904);
+}
+
+.searchBar button {
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 0 40px;
+  background-color: #008099;
+  border: none;
+  color: #fff;
+  letter-spacing: 0.07em;
+  font-weight: bold;
+}
+.homePge {
+  padding-top: 50px;
 }

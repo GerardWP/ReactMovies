@@ -15,7 +15,7 @@ function SignUp() {
   const handleInputChange = event => {
     const { name, value } = event.target;
     if (name === "username") {
-      updateUsername(value);
+      updateUsername(value.trim());
     } else {
       updatePassword(value);
     }
@@ -40,7 +40,7 @@ function SignUp() {
           updatePassword("");
           updateUsername("");
           return;
-        } else if (res.data) {
+        } else {
           console.log("Sign-Up Successful\n");
           console.log(res.data);
           successRedirect();
