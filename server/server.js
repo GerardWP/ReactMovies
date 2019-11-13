@@ -4,6 +4,10 @@ const app = express();
 const routes = require("./routes/index");
 const session = require("express-session");
 const passport = require("./passport");
+
+require("dotenv").config();
+
+// Mongo initialize
 require("./database");
 
 const PORT = process.env.PORT || 8080;
