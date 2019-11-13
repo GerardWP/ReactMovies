@@ -6,7 +6,6 @@ router.post("/", (req, res) => {
   const { username, password } = req.body;
   console.log("Saving User:\n");
   console.log(username, password);
-
   User.findOne({ username: username })
     .then(user => {
       if (user) {
@@ -33,7 +32,7 @@ router.post("/", (req, res) => {
 });
 
 router.post("/login", passport.authenticate("local"), (req, res) => {
-  console.log("logged in", req.user);
+  console.log("logged in\n", req.user);
   var userInfo = {
     username: req.user.username
   };

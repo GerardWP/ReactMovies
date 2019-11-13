@@ -1,12 +1,10 @@
 import React from "react";
-// import { Redirect } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import SearchBar from "./SearchBar";
 import "../App.css";
 
 function Nav(props) {
-  console.log("Nav props:");
-  console.log(props);
   const loggedIn = props.loggedIn;
 
   const logOut = event => {
@@ -14,9 +12,8 @@ function Nav(props) {
     console.log("logging out");
     axios
       .post("/user/logout")
-      .then(response => {
-        console.log(response.data);
-        if (response.status === 200) {
+      .then(res => {
+        if (res.status === 200) {
           props.updateUser({
             loggedIn: false,
             username: null
@@ -29,40 +26,31 @@ function Nav(props) {
   };
 
   return (
-    <div>
-      <header className="navbar App-header" id="nav-container">
-        <div className="col-4">
+    <>
+      <SearchBar loggedIn={loggedIn} />
+      <header className="appHeader" id="nav-container">
+        <h1>MoviesDb</h1>
+        <section>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <span className="menuBtn">Home</span>
+          </Link>
           {loggedIn ? (
-            <section className="navbar-section">
-              <Link
-                to="#"
-                className="btn btn-link text-secondary"
-                onClick={logOut}
-              >
-                <span className="text-secondary">logout</span>
-              </Link>
-              <p>Welcome, {props.username}!</p>
-            </section>
+            <Link to="/" style={{ textDecoration: "none" }} onClick={logOut}>
+              <span className="menuBtn">Logout</span>
+            </Link>
           ) : (
-            <section className="navbar-section">
-              <Link to="/" className="btn btn-link text-secondary">
-                <span className="text-secondary">home</span>
+            <>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <span className="menuBtn">Login</span>
               </Link>
-              <Link to="/login" className="btn btn-link text-secondary">
-                <span className="text-secondary">login</span>
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                <span className="menuBtn">Sign-Up</span>
               </Link>
-              <Link to="/signup" className="btn btn-link">
-                <span className="text-secondary">sign up</span>
-              </Link>
-            </section>
+            </>
           )}
-        </div>
-        <div className="col-4 col-mr-auto">
-          <div id="top-filler"></div>
-          <h1>MoviesDbGP</h1>
-        </div>
+        </section>
       </header>
-    </div>
+    </>
   );
 }
 

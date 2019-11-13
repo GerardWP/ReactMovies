@@ -47,9 +47,10 @@ function App() {
     <div className="App">
       <Router>
         <Nav updateUser={updateUser} loggedIn={loggedIn} username={username} />
-        {/* {username ? <h1>username</h1> : <h2>no usrname</h2>} */}
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/">
+            <Home loggedIn={loggedIn} username={username} />
+          </Route>
           <Route
             path="/login"
             render={props => <LogIn {...props} updateUser={updateUser} />}

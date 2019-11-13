@@ -6,6 +6,7 @@ function SignUp() {
   const [username, updateUsername] = useState("");
   const [password, updatePassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [failedMsg, setFailedMsg] = useState("");
 
   const successRedirect = () => {
     setRedirect(true);
@@ -14,7 +15,7 @@ function SignUp() {
   const handleInputChange = event => {
     const { name, value } = event.target;
     if (name === "username") {
-      updateUsername(value);
+      updateUsername(value.trim());
     } else {
       updatePassword(value);
     }
@@ -32,23 +33,32 @@ function SignUp() {
         password: password
       })
       .then(res => {
-        if (res.data) {
+        if (!res.data) {
+          console.log("Error With Sign-Up");
+        } else if (!res.data.username) {
+          setFailedMsg(res.data.error);
+          updatePassword("");
+          updateUsername("");
+          return;
+        } else {
           console.log("Sign-Up Successful\n");
           console.log(res.data);
           successRedirect();
-        } else {
-          console.log("Error With Sign-Up");
         }
       })
-      .catch(error => console.log("Server error\n" + error));
+      .catch(error => {
+        console.log("Server error\n" + error);
+      });
   };
 
   if (redirect) {
     return <Redirect to="/" />;
   } else {
     return (
-      <div>
-        <form>
+      <div className="signUpForm">
+        <h2>Sign-Up</h2>
+        <span>{failedMsg}</span>
+        <form id="myForm">
           <label>
             Username:
             <input
