@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 import "../App.css";
 
 function Nav(props) {
@@ -27,7 +27,6 @@ function Nav(props) {
 
   return (
     <>
-      <SearchBar loggedIn={loggedIn} />
       <header className="appHeader" id="nav-container">
         <h1>MoviesDb</h1>
         <section>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
 import API from "../utils/API";
+import "../App.css";
 
 function SearchBar(props) {
   const [query, setQuery] = useState("");
@@ -18,7 +18,7 @@ function SearchBar(props) {
     API.getMovie(query)
       .then(res => {
         console.log(".then - response");
-        console.log(res.data);
+        console.log(res.data.results);
       })
       .catch(err => {
         console.log(".catch - error");
