@@ -6,6 +6,7 @@ import SignUp from "../components/SignUp";
 import LogIn from "../components/LogInForm";
 import Home from "../components/Home";
 import Nav from "../components/Nav";
+import Predictive from "../components/Predictive";
 import API from "../utils/API";
 
 function Main() {
@@ -13,6 +14,7 @@ function Main() {
   const [loggedIn, setLogin] = useState(false);
   const [activeSearch, setActive] = useState("movie");
   const [results, setResults] = useState([]);
+  const [canRender, setRender] = useState(false);
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -20,7 +22,8 @@ function Main() {
   const searchQuery = event => {
     const { name, value } = event.target;
     console.log(`name: ${name} \nvalue: ${value}`);
-    setQuery(value.trim());
+    setQuery(value);
+    handleSubmit(value, event, activeSearch);
   };
 
   const category = event => {
@@ -30,7 +33,6 @@ function Main() {
   };
 
   const handleSubmit = (query, event, param) => {
-    setQuery("");
     event.preventDefault();
     console.log("handleSubmit...");
     console.log(query);
@@ -118,14 +120,26 @@ function Main() {
                 TV
               </span>
             </div>
-            <button onClick={event => handleSubmit(query, event, activeSearch)}>
+            <button
+              onClick={event => {
+                setRender(true);
+                setQuery("");
+                handleSubmit(query, event, activeSearch);
+              }}
+            >
               Search
             </button>
           </form>
         ) : null}
+        <Predictive res={results} query={query} />
         <Switch>
           <Route exact path="/">
-            <Home loggedIn={loggedIn} username={username} results={results} />
+            <Home
+              loggedIn={loggedIn}
+              username={username}
+              results={results}
+              canRender={canRender}
+            />
           </Route>
           <Route
             path="/login"

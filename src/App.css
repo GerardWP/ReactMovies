@@ -140,3 +140,21 @@ header h1 {
 .active:hover {
   color: #f2fdff;
 }
+
+#predictive {
+  padding-left: 0;
+  list-style: none;
+  width: 100%;
+  position: absolute;
+  top: 130px;
+}
+
+#predictive li {
+  width: 100%;
+  padding: 5px;
+  color: #666;
+  background: #eee;
+  text-align: center;
+  max-height: 200px;
+  overflow-y: scroll;
+}
