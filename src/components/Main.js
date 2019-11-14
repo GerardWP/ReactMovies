@@ -36,16 +36,19 @@ function Main() {
     event.preventDefault();
     console.log("handleSubmit...");
     console.log(query);
-    API.getGeneric(query, param)
-      .then(res => {
-        console.log(".then - response");
-        setResults(res.data.results);
-        console.log(results);
-      })
-      .catch(err => {
-        console.log(".catch - error");
-        console.log(err);
-      });
+    if (query.length === 0) {
+      return;
+    } else
+      API.getGeneric(query, param)
+        .then(res => {
+          console.log(".then - response");
+          setResults(res.data.results);
+          console.log(results);
+        })
+        .catch(err => {
+          console.log(".catch - error");
+          console.log(err);
+        });
   };
 
   useEffect(() => getUser(), []);

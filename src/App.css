@@ -98,6 +98,17 @@ header h1 {
   color: rgba(255, 255, 255, 0.904);
 }
 
+.searchBar input:focus {
+  box-shadow: none;
+  box-shadow: none -moz-mac-focusring;
+  outline: none;
+  background-image: linear-gradient(
+    to right,
+    #3993a5 1%,
+    rgba(255, 255, 255, 0) 70%
+  );
+}
+
 .searchBar button {
   font-size: 1em;
   text-transform: uppercase;
@@ -147,14 +158,43 @@ header h1 {
   width: 100%;
   position: absolute;
   top: 130px;
+  margin: 0;
+  max-height: 245px;
+  overflow-y: scroll;
+  /* background: linear-gradient(transparent 150px, red); */
+}
+
+.fader {
+  min-height: 100%;
+  background: linear-gradient(transparent 150px, red);
+  /* position: absolute; */
+  float: center;
+  /* z-index: 10; */
 }
 
 #predictive li {
   width: 100%;
-  padding: 5px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 40px;
   color: #666;
-  background: #eee;
-  text-align: center;
-  max-height: 200px;
-  overflow-y: scroll;
+  /* background: rgba(199, 199, 199, 0.685); */
+  background-color: #59aaba9c;
+  color: #fff;
+  text-align: left;
+  margin: 1px 0 0;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 150ms ease-in;
+}
+
+#predictive li:focus,
+#predictive li:hover {
+  box-shadow: none;
+  box-shadow: none -moz-mac-focusring;
+  outline: none;
+  /* background: rgba(199, 199, 199, 0.885); */
+  color: #fff;
+  background: #457781d2;
 }
