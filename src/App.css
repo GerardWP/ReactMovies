@@ -111,3 +111,32 @@ header h1 {
 .homePge {
   padding-top: 50px;
 }
+
+.searchCategory {
+  width: 180px;
+  background-color: #59aaba;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.8em;
+}
+
+.searchCat {
+  color: #2a565f;
+  cursor: pointer;
+  transition: 150ms ease-in;
+}
+
+.searchCat:hover {
+  color: #94d1dd;
+}
+
+.active {
+  color: #f2fdff;
+}
+
+.active:hover {
+  color: #f2fdff;
+}
