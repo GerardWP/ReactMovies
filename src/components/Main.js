@@ -6,13 +6,14 @@ import SignUp from "../components/SignUp";
 import LogIn from "../components/LogInForm";
 import Home from "../components/Home";
 import Nav from "../components/Nav";
+import Predictive from "../components/Predictive";
 import API from "../utils/API";
 
 function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
-  const [activeSearch, setActive] = useState("movie");
   const [results, setResults] = useState([]);
+  const [canRender, setRender] = useState(false);
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -20,30 +21,34 @@ function Main() {
   const searchQuery = event => {
     const { name, value } = event.target;
     console.log(`name: ${name} \nvalue: ${value}`);
-    setQuery(value.trim());
+    setQuery(value);
+    handleSubmit(value, event);
   };
 
-  const category = event => {
-    const value = event.target.getAttribute("data");
-    setQuery("");
-    setActive(value);
-  };
+  // const category = event => {
+  //   const value = event.target.getAttribute("data");
+  //   setQuery("");
+  //   setActive(value);
+  // };
+  // was used to handle the current search type - set by activeCategory and setActive, which also become params for the API
 
-  const handleSubmit = (query, event, param) => {
-    setQuery("");
+  const handleSubmit = (query, event) => {
     event.preventDefault();
     console.log("handleSubmit...");
     console.log(query);
-    API.getGeneric(query, param)
-      .then(res => {
-        console.log(".then - response");
-        setResults(res.data.results);
-        console.log(results);
-      })
-      .catch(err => {
-        console.log(".catch - error");
-        console.log(err);
-      });
+    if (query.length === 0) {
+      return;
+    } else
+      API.getMulti(query)
+        .then(res => {
+          console.log(".then - response");
+          setResults(res.data.results);
+          console.log(results);
+        })
+        .catch(err => {
+          console.log(".catch - error");
+          console.log(err);
+        });
   };
 
   useEffect(() => getUser(), []);
@@ -75,6 +80,8 @@ function Main() {
       .catch(err => console.log(err));
   };
 
+  // need to set up clickfunction to render for Results instead of search button - remove search button
+
   return (
     <div className="App">
       <Router>
@@ -89,43 +96,26 @@ function Main() {
               placeholder="Search"
               onChange={searchQuery} // input goes to state
             />
-            <div className="searchCategory">
-              <span
-                className={
-                  activeSearch === "movie" ? "searchCat active" : "searchCat"
-                }
-                data="movie"
-                onClick={category}
-              >
-                Movie
-              </span>
-              <span
-                className={
-                  activeSearch === "person" ? "searchCat active" : "searchCat"
-                }
-                data="person"
-                onClick={category}
-              >
-                Person
-              </span>
-              <span
-                className={
-                  activeSearch === "tv" ? "searchCat active" : "searchCat"
-                }
-                data="tv"
-                onClick={category}
-              >
-                TV
-              </span>
-            </div>
-            <button onClick={event => handleSubmit(query, event, activeSearch)}>
+            <button
+              onClick={event => {
+                setRender(true);
+                setQuery("");
+                handleSubmit(query, event);
+              }}
+            >
               Search
             </button>
           </form>
         ) : null}
+        <Predictive res={results} query={query} />
         <Switch>
           <Route exact path="/">
-            <Home loggedIn={loggedIn} username={username} results={results} />
+            <Home
+              loggedIn={loggedIn}
+              username={username}
+              results={results}
+              canRender={canRender}
+            />
           </Route>
           <Route
             path="/login"
