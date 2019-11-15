@@ -6,14 +6,17 @@ import SignUp from "../components/SignUp";
 import LogIn from "../components/LogInForm";
 import Home from "../components/Home";
 import Nav from "../components/Nav";
-import Predictive from "../components/Predictive";
+// import Predictive from "../components/Predictive";
 import API from "../utils/API";
 
 function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
-  const [canRender, setRender] = useState(false);
+  // const [canRender, setRender] = useState(false);
+  const [selection, setSelect] = useState([]);
+  // variable use to limit results shown in predictive text
+  // let mapResults = [];
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -24,13 +27,6 @@ function Main() {
     setQuery(value);
     handleSubmit(value, event);
   };
-
-  // const category = event => {
-  //   const value = event.target.getAttribute("data");
-  //   setQuery("");
-  //   setActive(value);
-  // };
-  // was used to handle the current search type - set by activeCategory and setActive, which also become params for the API
 
   const handleSubmit = (query, event) => {
     event.preventDefault();
@@ -43,7 +39,6 @@ function Main() {
         .then(res => {
           console.log(".then - response");
           setResults(res.data.results);
-          console.log(results);
         })
         .catch(err => {
           console.log(".catch - error");
@@ -51,6 +46,14 @@ function Main() {
         });
   };
 
+  const handleChoice = res => {
+    console.log([res]);
+    console.log("hanlding choice");
+    setSelect([res]);
+    console.log(selection);
+  };
+
+  // checks for user on page load
   useEffect(() => getUser(), []);
 
   const updateUser = userObject => {
@@ -96,25 +99,49 @@ function Main() {
               placeholder="Search"
               onChange={searchQuery} // input goes to state
             />
-            <button
-              onClick={event => {
-                setRender(true);
-                setQuery("");
-                handleSubmit(query, event);
-              }}
-            >
-              Search
-            </button>
           </form>
         ) : null}
-        <Predictive res={results} query={query} />
+        {results && query !== "" ? (
+          <ul id="predictive">
+            {results.map(res => {
+              return (
+                <li
+                  key={res.id}
+                  tabIndex="0"
+                  onClick={event => {
+                    setQuery("");
+                    handleChoice({ ...res });
+                  }}
+                >
+                  {res.media_type === "movie" ? (
+                    <>
+                      <h4>{res.title}</h4>
+                      <h6>{res.release_date}</h6>
+                    </>
+                  ) : res.media_type === "tv" ? (
+                    <>
+                      <h4>{res.name}</h4>
+                      <h6>{res.first_air_date}</h6>
+                    </>
+                  ) : (
+                    <>
+                      <h4>{res.name}</h4>
+                      <h6>{res.known_for_department}</h6>
+                    </>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <span></span>
+        )}
         <Switch>
           <Route exact path="/">
             <Home
               loggedIn={loggedIn}
               username={username}
-              results={results}
-              canRender={canRender}
+              selection={selection}
             />
           </Route>
           <Route

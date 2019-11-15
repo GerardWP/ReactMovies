@@ -153,7 +153,7 @@ header h1 {
 }
 
 #predictive {
-  padding-left: 0;
+  padding: 0;
   list-style: none;
   width: 100%;
   position: absolute;
@@ -161,15 +161,15 @@ header h1 {
   margin: 0;
   max-height: 245px;
   overflow-y: scroll;
-  /* background: linear-gradient(transparent 150px, red); */
+  background: #fff;
 }
 
-.fader {
-  min-height: 100%;
-  background: linear-gradient(transparent 150px, red);
-  /* position: absolute; */
-  float: center;
-  /* z-index: 10; */
+h6 {
+  margin: 0 0 0 10px;
+  color: #ffffff88;
+}
+h4 {
+  margin: 0;
 }
 
 #predictive li {
