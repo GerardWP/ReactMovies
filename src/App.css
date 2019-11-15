@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  overflow-x: hidden;
 }
 
 .App-logo {
@@ -18,9 +19,28 @@
   height: 80px;
 }
 
+.appHeader div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+}
+
 header h1 {
   margin: 0;
   /* font-size: em; */
+}
+
+h5 {
+  margin: 0;
+  font-weight: 300;
+  text-transform: uppercase;
+  font-size: 0.7em;
+}
+
+h5 span {
+  color: #68e6ff;
 }
 
 .appHeader .menuBtn {
@@ -28,6 +48,10 @@ header h1 {
   /* font-size: 0.6em; */
   text-transform: uppercase;
   margin-left: 15px;
+}
+
+.appHeader section {
+  font-size: 0.8em;
 }
 
 .signUpForm {
@@ -52,7 +76,8 @@ header h1 {
 }
 .homePge {
   background: #eee;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   padding: 15px;
 }
 
@@ -62,7 +87,7 @@ header h1 {
   left: 0;
   top: 30px;
   display: flex;
-  background: grey;
+  /* background: grey; */
   flex: 1;
   height: 50px;
   transition: 200ms ease-in;
@@ -84,18 +109,18 @@ header h1 {
 }
 
 .searchBar input::placeholder {
-  color: rgba(255, 255, 255, 0.904);
+  color: rgba(255, 255, 255, 0.7);
   opacity: 1; /* Firefox */
 }
 
 .searchBar input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
-  color: rgba(255, 255, 255, 0.904);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .searchBar input::-ms-input-placeholder {
   /* Microsoft Edge */
-  color: rgba(255, 255, 255, 0.904);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .searchBar input:focus {
@@ -118,9 +143,6 @@ header h1 {
   color: #fff;
   letter-spacing: 0.07em;
   font-weight: bold;
-}
-.homePge {
-  padding-top: 50px;
 }
 
 .searchCategory {
@@ -197,4 +219,53 @@ h4 {
   /* background: rgba(199, 199, 199, 0.885); */
   color: #fff;
   background: #457781d2;
+}
+
+#resultContainer {
+  display: flex;
+  margin: 50px 0;
+  overflow-x: scroll;
+  padding-left: 210px;
+}
+#resultContainer div h1 {
+  margin: 0 0 10px;
+  height: 110px;
+}
+
+#resultContainer div {
+  min-width: 130px;
+  max-width: 130px;
+  min-height: 180px;
+  /* max-height: 200px; */
+  margin: 25px 20px 0px 0;
+  padding: 20px;
+  background: lightgray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#resultContainer div#target {
+  margin: 0 20px 0 0;
+  /* background: lightcoral; */
+  /* position: relative; */
+  min-width: 150px;
+  position: absolute;
+  left: 15px;
+  max-width: 150px;
+  /* outline: #4caf50 solid 10px; */
+  border-right: 20px solid #eee;
+}
+
+#resultContainer div#target:before {
+  content: "Related";
+  position: absolute;
+  top: 0;
+  right: -20px;
+  transform: translateX(100%);
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  color: #666;
 }
