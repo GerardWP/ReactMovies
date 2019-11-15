@@ -12,7 +12,6 @@ import API from "../utils/API";
 function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
-  const [activeSearch, setActive] = useState("movie");
   const [results, setResults] = useState([]);
   const [canRender, setRender] = useState(false);
 
@@ -23,23 +22,24 @@ function Main() {
     const { name, value } = event.target;
     console.log(`name: ${name} \nvalue: ${value}`);
     setQuery(value);
-    handleSubmit(value, event, activeSearch);
+    handleSubmit(value, event);
   };
 
-  const category = event => {
-    const value = event.target.getAttribute("data");
-    setQuery("");
-    setActive(value);
-  };
+  // const category = event => {
+  //   const value = event.target.getAttribute("data");
+  //   setQuery("");
+  //   setActive(value);
+  // };
+  // was used to handle the current search type - set by activeCategory and setActive, which also become params for the API
 
-  const handleSubmit = (query, event, param) => {
+  const handleSubmit = (query, event) => {
     event.preventDefault();
     console.log("handleSubmit...");
     console.log(query);
     if (query.length === 0) {
       return;
     } else
-      API.getGeneric(query, param)
+      API.getMulti(query)
         .then(res => {
           console.log(".then - response");
           setResults(res.data.results);
@@ -80,6 +80,8 @@ function Main() {
       .catch(err => console.log(err));
   };
 
+  // need to set up clickfunction to render for Results instead of search button - remove search button
+
   return (
     <div className="App">
       <Router>
@@ -94,40 +96,11 @@ function Main() {
               placeholder="Search"
               onChange={searchQuery} // input goes to state
             />
-            <div className="searchCategory">
-              <span
-                className={
-                  activeSearch === "movie" ? "searchCat active" : "searchCat"
-                }
-                data="movie"
-                onClick={category}
-              >
-                Movie
-              </span>
-              <span
-                className={
-                  activeSearch === "person" ? "searchCat active" : "searchCat"
-                }
-                data="person"
-                onClick={category}
-              >
-                Person
-              </span>
-              <span
-                className={
-                  activeSearch === "tv" ? "searchCat active" : "searchCat"
-                }
-                data="tv"
-                onClick={category}
-              >
-                TV
-              </span>
-            </div>
             <button
               onClick={event => {
                 setRender(true);
                 setQuery("");
-                handleSubmit(query, event, activeSearch);
+                handleSubmit(query, event);
               }}
             >
               Search
