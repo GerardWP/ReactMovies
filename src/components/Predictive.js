@@ -1,9 +1,9 @@
 import React from "react";
 
 function Predictive(props) {
-  if (props.res && props.query !== "") {
-    let results = props.res;
-    if (props.res.length >= 6) {
+  let results = props.res;
+  if (results && props.query !== "") {
+    if (results.length >= 6) {
       results = results.splice(0, 6);
     }
     return (
@@ -11,7 +11,20 @@ function Predictive(props) {
         <div className="fader"></div>
         {results.map(res => {
           return (
-            <li key={res.id} tabIndex="0">
+            <li
+              key={res.id}
+              tabIndex="0"
+              onClick={event => {
+                props.setRender(true);
+                props.setQuery("");
+                props.handleSubmit(
+                  res.media_type === "movie"
+                    ? res.title.toLowerCase()
+                    : res.name.toLowerCase(),
+                  event
+                );
+              }}
+            >
               {res.media_type === "movie" ? res.title : res.name}
             </li>
           );
@@ -21,4 +34,4 @@ function Predictive(props) {
   } else return <span></span>;
 }
 
-export default Predictive;
+// export default Predictive;
