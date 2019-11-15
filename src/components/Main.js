@@ -13,10 +13,14 @@ function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
-  // const [canRender, setRender] = useState(false);
-  const [selection, setSelect] = useState([]);
-  // variable use to limit results shown in predictive text
-  // let mapResults = [];
+  const [canRender, setRender] = useState(false);
+  const [targetID, setTarget] = useState(null);
+
+  const handler = value => {
+    console.log(value);
+    setRender(true);
+    // setSelect(value);
+  };
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -38,6 +42,7 @@ function Main() {
       API.getMulti(query)
         .then(res => {
           console.log(".then - response");
+          console.log(res);
           setResults(res.data.results);
         })
         .catch(err => {
@@ -46,12 +51,9 @@ function Main() {
         });
   };
 
-  const handleChoice = res => {
-    console.log([res]);
-    console.log("hanlding choice");
-    setSelect([res]);
-    console.log(selection);
-  };
+  // const handleChoice = id => {
+  //   setTarget(id)
+  // };
 
   // checks for user on page load
   useEffect(() => getUser(), []);
@@ -110,7 +112,10 @@ function Main() {
                   tabIndex="0"
                   onClick={event => {
                     setQuery("");
-                    handleChoice({ ...res });
+                    setRender(true);
+                    setTarget(res.id);
+                    // handleChoice(res.id)
+                    // handleChoice({ ...res });
                   }}
                 >
                   {res.media_type === "movie" ? (
@@ -140,8 +145,10 @@ function Main() {
           <Route exact path="/">
             <Home
               loggedIn={loggedIn}
-              username={username}
-              selection={selection}
+              results={results}
+              targetID={targetID}
+              handler={handler}
+              canRender={canRender}
             />
           </Route>
           <Route

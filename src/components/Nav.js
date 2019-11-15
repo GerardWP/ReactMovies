@@ -28,7 +28,14 @@ function Nav(props) {
   return (
     <>
       <header className="appHeader" id="nav-container">
-        <h1>MoviesDb</h1>
+        <div>
+          <h1>MoviesDb</h1>
+          {loggedIn ? (
+            <h5>
+              Welcome <span>{props.username}</span>
+            </h5>
+          ) : null}
+        </div>
         <section>
           <Link to="/" style={{ textDecoration: "none" }}>
             <span className="menuBtn">Home</span>
