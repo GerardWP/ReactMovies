@@ -81,6 +81,10 @@ h5 span {
   padding: 15px;
 }
 
+.homePge h1 {
+  margin-top: 60px;
+}
+
 .searchBar {
   position: absolute;
   width: 100%;
@@ -236,7 +240,7 @@ h4 {
   min-width: 130px;
   max-width: 130px;
   min-height: 180px;
-  /* max-height: 200px; */
+  color: #fff;
   margin: 25px 20px 0px 0;
   padding: 20px;
   background: lightgray;
@@ -248,13 +252,11 @@ h4 {
 
 #resultContainer div#target {
   margin: 0 20px 0 0;
-  /* background: lightcoral; */
-  /* position: relative; */
+  background: lightcoral;
   min-width: 150px;
   position: absolute;
   left: 15px;
   max-width: 150px;
-  /* outline: #4caf50 solid 10px; */
   border-right: 20px solid #eee;
 }
 

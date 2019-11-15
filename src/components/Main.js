@@ -18,9 +18,10 @@ function Main() {
 
   const handler = value => {
     console.log(value);
-    setRender(true);
-    // setSelect(value);
+    setRender(value);
   };
+
+  const clearRes = () => setResults([]);
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -90,7 +91,12 @@ function Main() {
   return (
     <div className="App">
       <Router>
-        <Nav updateUser={updateUser} loggedIn={loggedIn} username={username} />
+        <Nav
+          updateUser={updateUser}
+          loggedIn={loggedIn}
+          username={username}
+          clearRes={clearRes}
+        />
         {loggedIn ? (
           <form className={loggedIn ? "searchBar searchLogged" : "searchBar"}>
             <input
