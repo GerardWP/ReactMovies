@@ -2,7 +2,7 @@ import React from "react";
 
 function ResultsContainer(props) {
   const target = props.targetID;
-  const results = props.results;
+  const results = props.resRender;
   console.log("targs");
   console.log(target);
 

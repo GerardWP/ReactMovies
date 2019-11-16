@@ -18,14 +18,16 @@ function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
-  const [canRender, setRender] = useState(false);
+  const [resRender, setResRender] = useState([]);
   const [targetID, setTarget] = useState(null);
 
   const handler = value => {
-    setRender(value);
+    console.log("hndler on res cont clicks");
   };
 
-  const clearRes = () => setResults([]);
+  const clearRes = () => {
+    setResRender([]);
+  };
 
   //  Value from Search input
   const [query, setQuery] = useState("");
@@ -39,21 +41,21 @@ function Main() {
 
   const handleSubmit = (query, event) => {
     event.preventDefault();
-    console.log("handleSubmit...");
-    console.log(query);
     if (query.length === 0) {
       return;
     } else
       API.getMulti(query)
         .then(res => {
-          console.log(".then - response");
-          console.log(res);
           setResults(res.data.results);
         })
         .catch(err => {
-          console.log(".catch - error");
           console.log(err);
         });
+  };
+
+  const resSelect = (type, id) => {
+    console.log(type);
+    console.log(id);
   };
 
   // checks for user on page load
@@ -106,10 +108,7 @@ function Main() {
               onChange={searchQuery} // input goes to state
               onKeyDown={e =>
                 e.key === "Enter"
-                  ? (setTarget(""),
-                    setQuery(""),
-                    setRender(true),
-                    handleSubmit(query, e))
+                  ? (setTarget(""), setResRender(results))
                   : null
               }
             />
@@ -124,12 +123,11 @@ function Main() {
                   tabIndex="0"
                   onClick={event => {
                     setQuery("");
-                    setRender(true);
-                    setTarget(res.id);
+                    resSelect(res.media_type, res.id);
                   }}
                   onKeyDown={e =>
                     e.key === "Enter"
-                      ? (setQuery(""), setRender(true), setTarget(res.id))
+                      ? (setQuery(""), resSelect(res.media_type, res.id))
                       : null
                   }
                 >
@@ -160,10 +158,9 @@ function Main() {
           <Route exact path="/">
             <Home
               loggedIn={loggedIn}
-              results={results}
               targetID={targetID}
               handler={handler}
-              canRender={canRender}
+              resRender={resRender}
             />
           </Route>
           <Route
