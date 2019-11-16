@@ -81,6 +81,10 @@ h5 span {
   padding: 15px;
 }
 
+.homePge h1 {
+  margin-top: 60px;
+}
+
 .searchBar {
   position: absolute;
   width: 100%;
@@ -184,6 +188,7 @@ h5 span {
   max-height: 245px;
   overflow-y: scroll;
   background: #fff;
+  z-index: 100;
 }
 
 h6 {
@@ -225,18 +230,62 @@ h4 {
   display: flex;
   margin: 50px 0;
   overflow-x: scroll;
-  padding-left: 210px;
 }
 #resultContainer div h1 {
   margin: 0 0 10px;
   height: 110px;
 }
 
-#resultContainer div {
+#relatedRes {
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 20px;
+}
+
+#relatedRes div {
+  min-width: 150px;
+}
+
+.resBox {
+  background: rgb(160, 160, 160);
+  color: #fff;
+  height: 200px;
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#target {
+  margin: 0 20px 0 0;
+  background: rgb(55, 161, 223);
+  min-width: 210px;
+  max-width: 210px;
+  flex: 1;
+  min-height: 280px;
+  position: relative;
+}
+
+#target:before {
+  content: "Related";
+  position: absolute;
+  top: 0;
+  right: -20px;
+  transform: translateX(100%);
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  color: #777;
+  z-index: 300;
+}
+
+/* #resultContainer div {
   min-width: 130px;
   max-width: 130px;
   min-height: 180px;
-  /* max-height: 200px; */
+  color: #fff;
   margin: 25px 20px 0px 0;
   padding: 20px;
   background: lightgray;
@@ -248,13 +297,11 @@ h4 {
 
 #resultContainer div#target {
   margin: 0 20px 0 0;
-  /* background: lightcoral; */
-  /* position: relative; */
+  background: lightcoral;
   min-width: 150px;
   position: absolute;
   left: 15px;
   max-width: 150px;
-  /* outline: #4caf50 solid 10px; */
   border-right: 20px solid #eee;
 }
 
@@ -268,4 +315,4 @@ h4 {
   font-size: 0.75em;
   letter-spacing: 0.05em;
   color: #666;
-}
+} */

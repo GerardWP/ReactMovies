@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import SearchBar from "./SearchBar";
 import "../App.css";
 
 function Nav(props) {
@@ -9,6 +8,7 @@ function Nav(props) {
 
   const logOut = event => {
     event.preventDefault();
+    props.clearRes();
     console.log("logging out");
     axios
       .post("/user/logout")
