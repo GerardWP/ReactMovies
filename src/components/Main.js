@@ -9,6 +9,11 @@ import Nav from "../components/Nav";
 // import Predictive from "../components/Predictive";
 import API from "../utils/API";
 
+// on selection will have to render and xtra API call for -
+// person: get id, and search that persons movies, if actor, director - scripts, if writer...
+// movie: movie search for cast to populate cast, and any other relevant calls - if bleongs to a collection..
+// tv - all seasons, episodes even...
+
 function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
@@ -17,7 +22,6 @@ function Main() {
   const [targetID, setTarget] = useState(null);
 
   const handler = value => {
-    console.log(value);
     setRender(value);
   };
 
@@ -52,10 +56,6 @@ function Main() {
         });
   };
 
-  // const handleChoice = id => {
-  //   setTarget(id)
-  // };
-
   // checks for user on page load
   useEffect(() => getUser(), []);
 
@@ -86,8 +86,6 @@ function Main() {
       .catch(err => console.log(err));
   };
 
-  // need to set up clickfunction to render for Results instead of search button - remove search button
-
   return (
     <div className="App">
       <Router>
@@ -106,6 +104,14 @@ function Main() {
               name="searchBar"
               placeholder="Search"
               onChange={searchQuery} // input goes to state
+              onKeyDown={e =>
+                e.key === "Enter"
+                  ? (setTarget(""),
+                    setQuery(""),
+                    setRender(true),
+                    handleSubmit(query, e))
+                  : null
+              }
             />
           </form>
         ) : null}
@@ -120,9 +126,12 @@ function Main() {
                     setQuery("");
                     setRender(true);
                     setTarget(res.id);
-                    // handleChoice(res.id)
-                    // handleChoice({ ...res });
                   }}
+                  onKeyDown={e =>
+                    e.key === "Enter"
+                      ? (setQuery(""), setRender(true), setTarget(res.id))
+                      : null
+                  }
                 >
                   {res.media_type === "movie" ? (
                     <>

@@ -188,6 +188,7 @@ h5 span {
   max-height: 245px;
   overflow-y: scroll;
   background: #fff;
+  z-index: 100;
 }
 
 h6 {
@@ -229,14 +230,58 @@ h4 {
   display: flex;
   margin: 50px 0;
   overflow-x: scroll;
-  padding-left: 210px;
 }
 #resultContainer div h1 {
   margin: 0 0 10px;
   height: 110px;
 }
 
-#resultContainer div {
+#relatedRes {
+  display: flex;
+  overflow-x: scroll;
+  padding-top: 20px;
+}
+
+#relatedRes div {
+  min-width: 150px;
+}
+
+.resBox {
+  background: rgb(160, 160, 160);
+  color: #fff;
+  height: 200px;
+  margin-right: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+#target {
+  margin: 0 20px 0 0;
+  background: rgb(55, 161, 223);
+  min-width: 210px;
+  max-width: 210px;
+  flex: 1;
+  min-height: 280px;
+  position: relative;
+}
+
+#target:before {
+  content: "Related";
+  position: absolute;
+  top: 0;
+  right: -20px;
+  transform: translateX(100%);
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  color: #777;
+  z-index: 300;
+}
+
+/* #resultContainer div {
   min-width: 130px;
   max-width: 130px;
   min-height: 180px;
@@ -270,4 +315,4 @@ h4 {
   font-size: 0.75em;
   letter-spacing: 0.05em;
   color: #666;
-}
+} */
