@@ -53,9 +53,14 @@ function Main() {
         });
   };
 
-  const resSelect = (type, id) => {
-    console.log(type);
-    console.log(id);
+  const findSelect = (type, id) => {
+    API.findChoice(id, type)
+      .then(res => {
+        console.log("it worked");
+        console.log(res);
+        setResRender([res.data]);
+      })
+      .catch(err => console.log(err));
   };
 
   // checks for user on page load
@@ -123,11 +128,11 @@ function Main() {
                   tabIndex="0"
                   onClick={event => {
                     setQuery("");
-                    resSelect(res.media_type, res.id);
+                    findSelect(res.media_type, res.id);
                   }}
                   onKeyDown={e =>
                     e.key === "Enter"
-                      ? (setQuery(""), resSelect(res.media_type, res.id))
+                      ? (setQuery(""), findSelect(res.media_type, res.id))
                       : null
                   }
                 >
