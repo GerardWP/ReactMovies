@@ -2,9 +2,11 @@ import React from "react";
 
 function ResultsContainer(props) {
   const target = props.targetID;
-  const results = props.results;
-  console.log("targs");
-  console.log(target);
+  const results = props.resRender;
+  console.log("resssyyyy");
+  console.log(results);
+
+  // NEED TO AMEND TO HANDLE NEW RESULT RENDERING
 
   return (
     <div id="resultContainer">
@@ -30,7 +32,7 @@ function ResultsContainer(props) {
           } else {
             return (
               <div key={res.id} className="resBox">
-                <h3>{res.media_type === "movie" ? res.title : res.name}</h3>
+                <h3>{res.title || res.name}</h3>
                 <span onClick={() => props.handler("MAYBE THIS WORKS")}>
                   click
                 </span>
