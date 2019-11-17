@@ -12,7 +12,7 @@ export default {
   findChoice: (id, type) => {
     console.log("findChoice function, running...");
     return axios.get(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=en-US&append_to_response=videos,credits,recommendations`
+      `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=en-US&append_to_response=videos,images,similar,credits,recommendations`
     );
   }
 };

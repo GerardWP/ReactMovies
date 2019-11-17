@@ -230,26 +230,42 @@ h4 {
   display: flex;
   margin: 50px 0;
   overflow-x: scroll;
+  background: lightgrey;
 }
+
 #resultContainer div h1 {
   margin: 0 0 10px;
-  height: 110px;
 }
 
 #relatedRes {
   display: flex;
-  overflow-x: scroll;
-  padding-top: 20px;
+  flex-wrap: row;
+  gap: 20px;
+  background: yellow;
+  margin-top: 50px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  height: 300px;
 }
 
-#relatedRes div {
-  min-width: 150px;
-}
+/* #relatedRes div {
+  scroll-snap-align: start;
+  flex: 1;
+  min-width: 180px;
+  max-width: 180px;
+  min-height: 100%;
+  max-height: 100%;
+} */
 
 .resBox {
+  scroll-snap-align: start;
   background: rgb(160, 160, 160);
   color: #fff;
-  height: 200px;
+  max-height: 100%;
+  min-width: 200px;
+  max-width: 200px;
   margin-right: 18px;
   display: flex;
   flex-direction: column;
@@ -268,7 +284,7 @@ h4 {
   position: relative;
 }
 
-#target:before {
+/* #target:before {
   content: "Related";
   position: absolute;
   top: 0;
@@ -279,40 +295,4 @@ h4 {
   letter-spacing: 0.05em;
   color: #777;
   z-index: 300;
-}
-
-/* #resultContainer div {
-  min-width: 130px;
-  max-width: 130px;
-  min-height: 180px;
-  color: #fff;
-  margin: 25px 20px 0px 0;
-  padding: 20px;
-  background: lightgray;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#resultContainer div#target {
-  margin: 0 20px 0 0;
-  background: lightcoral;
-  min-width: 150px;
-  position: absolute;
-  left: 15px;
-  max-width: 150px;
-  border-right: 20px solid #eee;
-}
-
-#resultContainer div#target:before {
-  content: "Related";
-  position: absolute;
-  top: 0;
-  right: -20px;
-  transform: translateX(100%);
-  text-transform: uppercase;
-  font-size: 0.75em;
-  letter-spacing: 0.05em;
-  color: #666;
 } */
