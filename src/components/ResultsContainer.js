@@ -24,6 +24,7 @@ function ResultsContainer(props) {
   } else {
     return (
       <SearchDisplay
+        findGenre={props.findGenre}
         results={results}
         handler={props.handler}
         genres={props.genres}

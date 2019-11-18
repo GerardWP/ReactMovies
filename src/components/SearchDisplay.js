@@ -29,7 +29,7 @@ function SearchDisplay(props) {
               />
             </div>
             <div className="searchInfo">
-              <h1>{res.media_type === "movie" ? res.title : res.name}</h1>
+              <h1>{res.title || res.name}</h1>
               {res.vote_average ? (
                 <StarRatings
                   rating={res.vote_average}
@@ -51,7 +51,20 @@ function SearchDisplay(props) {
                   {res.genre_ids.map(id => {
                     return genres.map(genre =>
                       genre.id === id ? (
-                        <button key={genre.id}>{genre.name}</button>
+                        <button
+                          key={genre.id}
+                          onClick={() =>
+                            props.findGenre(genre.id, 1, res.media_type)
+                          }
+                          tabIndex="0"
+                          onKeyDown={e =>
+                            e.key === "Enter"
+                              ? props.findGenre(genre.id, 1, res.media_type)
+                              : null
+                          }
+                        >
+                          {genre.name}
+                        </button>
                       ) : null
                     );
                   })}
@@ -73,9 +86,10 @@ function SearchDisplay(props) {
                           />
                         ) : null}
                         <button
-                          onClick={() =>
-                            props.handler(item.media_type, item.id)
-                          }
+                          key={item.id}
+                          onClick={() => {
+                            props.handler(item.media_type, item.id);
+                          }}
                           tabIndex="0"
                           onKeyDown={e =>
                             e.key === "Enter"

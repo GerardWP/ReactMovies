@@ -21,6 +21,7 @@ function Main() {
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
   const [resRender, setResRender] = useState([]);
+  const [placeholder, setPlaceholder] = useState("Search");
 
   const handler = (type, id) => {
     findSelect(type, id);
@@ -39,6 +40,24 @@ function Main() {
     setQuery(value);
     // should i put handleSubmit into a setTimeout to prevent the api from being overloaded?
     handleSubmit(value, event);
+  };
+
+  const findGenre = (id, page, type) => {
+    API.findGenre(id, page, type)
+      .then(res => {
+        if (res.data.results.length > 0) {
+          let genreObj = res.data.results.map(res => ({
+            ...res,
+            media_type: type
+          }));
+          setResRender(genreObj);
+        } else {
+          setQuery("");
+          setPlaceholder("Sorry, No results Found");
+          setTimeout(() => setPlaceholder("Search"), 2000);
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   const handleSubmit = (query, event) => {
@@ -111,7 +130,7 @@ function Main() {
               id="site-search"
               value={query} // need this to make sure state goes to input
               name="searchBar"
-              placeholder="Search"
+              placeholder={placeholder}
               onChange={searchQuery} // input goes to state
               onKeyDown={e =>
                 e.key === "Enter"
@@ -166,6 +185,7 @@ function Main() {
             <Home
               loggedIn={loggedIn}
               handler={handler}
+              findGenre={findGenre}
               resRender={resRender}
               user={username}
               genres={genres}
