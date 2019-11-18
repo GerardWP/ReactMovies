@@ -6,8 +6,10 @@ import SignUp from "../components/SignUp";
 import LogIn from "../components/LogInForm";
 import Home from "../components/Home";
 import Nav from "../components/Nav";
-// import Predictive from "../components/Predictive";
+// Utilities
 import API from "../utils/API";
+// Data
+import genres from "../components/GenreLists";
 
 // on selection will have to render and xtra API call for -
 // person: get id, and search that persons movies, if actor, director - scripts, if writer...
@@ -166,6 +168,7 @@ function Main() {
               handler={handler}
               resRender={resRender}
               user={username}
+              genres={genres}
             />
           </Route>
           <Route

@@ -11,6 +11,7 @@ function Home(props) {
           resRender={props.resRender}
           handler={props.handler}
           targetID={props.targetID}
+          genres={props.genres}
         />
       </div>
     );

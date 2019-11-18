@@ -239,15 +239,16 @@ h4 {
 
 #relatedRes {
   display: flex;
-  flex-wrap: row;
-  gap: 20px;
-  background: yellow;
-  margin-top: 50px;
+  flex-flow: row wrap;
+  width: 100%;
+  /* background: yellow; */
+  margin: 65px 0 0 12.5px;
   overflow-x: auto;
+  /* overflow-x: hidden; */
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  height: 300px;
+  height: auto;
 }
 
 /* #relatedRes div {
@@ -261,27 +262,162 @@ h4 {
 
 .resBox {
   scroll-snap-align: start;
-  background: rgb(160, 160, 160);
+  background: rgb(60, 68, 73);
+  border: 1px solid #fff;
   color: #fff;
-  max-height: 100%;
-  min-width: 200px;
-  max-width: 200px;
-  margin-right: 18px;
+  height: auto;
+  min-height: 200px;
+  flex: 1;
+  min-width: 500px;
+  /* max-width: 200px; */
+  margin: 0 25px 25px 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+}
+
+.imgLinks {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.imgLinks img {
+  height: 278px;
+  width: 185px;
+}
+
+.searchInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  align-items: flex-start;
+  /* justify-content: space-between; */
+  height: auto;
+  /* max-height: 278px; */
+  overflow-y: scroll;
+  padding-left: 20px;
+  /* flex: 1; */
+  height: 100%;
+}
+
+.searchInfo h1 {
+  margin: 0 0 5px;
+  color: #f7fcfd;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  align-content: flex-start;
+}
+
+.searchInfo span {
+  font-size: 0.8em;
+  color: #ffffff66;
+  /* background: yellow; */
+  text-align: left;
+  margin: 4px 0 3px;
+}
+
+.searchInfo p {
+  text-align: left;
+  margin-top: 3px;
+  line-height: 1.3em;
+  font-size: 0.9em;
+}
+
+.itemBtn {
+  color: #eeeeee;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  background: #ffffff33;
+  border-radius: 4px;
+  padding: 10px 40px;
+  border: none;
+  cursor: pointer;
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); */
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.itemBtn:hover {
+  color: #ffffff;
+  background: #ffffff44;
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.15); */
 }
 
 #target {
   margin: 0 20px 0 0;
+  color: #fff;
   background: rgb(55, 161, 223);
   min-width: 210px;
   max-width: 210px;
   flex: 1;
   min-height: 280px;
   position: relative;
+}
+
+.resGenres {
+  margin-bottom: 5px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.resGenres button {
+  font-size: 0.6em;
+  padding: 6px 17px;
+  margin: 0 10px 10px 0;
+  border: none;
+  background: #ffffff11;
+  color: #ffffffbb;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: 150ms ease-in;
+}
+
+.knownForBtn button {
+  margin-top: 6px;
+  padding: 5px 15px;
+  color: #eee;
+}
+
+.knownForBtn button:hover {
+  background: #ffffff31;
+}
+
+.knownForBtn {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  justify-content: flex-start;
+  background: #ffffff00;
+  border-radius: 4px;
+  padding: 0px;
+  margin: 0px 20px 5px 0;
+}
+
+.knownForBtn > :first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.knownForBtn span {
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  color: #ffffffd5;
+  padding: 0;
+  margin: 0 0 0px;
+}
+
+.knownForBtn img {
+  max-width: 40px;
+  margin-right: 10px;
+  height: auto;
 }
 
 /* #target:before {

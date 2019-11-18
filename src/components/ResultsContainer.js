@@ -13,7 +13,7 @@ function ResultsContainer(props) {
     return (
       <div id="resultContainer">
         <div>
-          <div key={results.id} id="target" className="resBox">
+          <div key={results.id} id="target">
             <h1>{results.title || results.name}</h1>
             <h2>Main</h2>
             <span onClick={() => console.log(results.id)}>click</span>
@@ -22,7 +22,13 @@ function ResultsContainer(props) {
       </div>
     );
   } else {
-    return <SearchDisplay results={results} handler={props.handler} />;
+    return (
+      <SearchDisplay
+        results={results}
+        handler={props.handler}
+        genres={props.genres}
+      />
+    );
   }
 }
 
