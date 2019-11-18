@@ -195,7 +195,9 @@ function Main() {
             path="/login"
             render={props => <LogIn {...props} updateUser={updateUser} />}
           />
-          <Route path="/signup" component={SignUp} />
+          <Route path="/signup">
+            <SignUp />
+          </Route>
         </Switch>
       </Router>
     </div>
