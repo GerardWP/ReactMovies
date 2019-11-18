@@ -6,8 +6,10 @@ import SignUp from "../components/SignUp";
 import LogIn from "../components/LogInForm";
 import Home from "../components/Home";
 import Nav from "../components/Nav";
-// import Predictive from "../components/Predictive";
+// Utilities
 import API from "../utils/API";
+// Data
+import genres from "../components/GenreLists";
 
 // on selection will have to render and xtra API call for -
 // person: get id, and search that persons movies, if actor, director - scripts, if writer...
@@ -19,10 +21,9 @@ function Main() {
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
   const [resRender, setResRender] = useState([]);
-  const [targetID, setTarget] = useState(null);
 
-  const handler = value => {
-    console.log("hndler on res cont clicks");
+  const handler = (type, id) => {
+    findSelect(type, id);
   };
 
   const clearRes = () => {
@@ -36,6 +37,7 @@ function Main() {
     const { name, value } = event.target;
     console.log(`name: ${name} \nvalue: ${value}`);
     setQuery(value);
+    // should i put handleSubmit into a setTimeout to prevent the api from being overloaded?
     handleSubmit(value, event);
   };
 
@@ -113,7 +115,7 @@ function Main() {
               onChange={searchQuery} // input goes to state
               onKeyDown={e =>
                 e.key === "Enter"
-                  ? (setTarget(""), setResRender(results))
+                  ? (e.preventDefault(), setQuery(""), setResRender(results))
                   : null
               }
             />
@@ -163,9 +165,10 @@ function Main() {
           <Route exact path="/">
             <Home
               loggedIn={loggedIn}
-              targetID={targetID}
               handler={handler}
               resRender={resRender}
+              user={username}
+              genres={genres}
             />
           </Route>
           <Route

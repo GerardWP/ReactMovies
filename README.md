@@ -19,3 +19,5 @@ vote average = vote_average
 number of votes = vote_count
 
 }
+
+https://api.themoviedb.org/3/discover/movie?//apikey//&language=en-US&sort_by=popularity.desc&include_adult=false&with_genres=//genre_id//
