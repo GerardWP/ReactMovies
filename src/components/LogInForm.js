@@ -45,18 +45,15 @@ function LogIn(props) {
     return <Redirect to="/" />;
   } else {
     return (
-      <div>
-        <h4>Login</h4>
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="username">
-                Username
-              </label>
+      <div className="LogInForm">
+        <h2>Login</h2>
+        <form>
+          <div>
+            <div>
+              <label htmlFor="username">Username</label>
             </div>
-            <div className="col-3 col-mr-auto">
+            <div>
               <input
-                className="form-input"
                 type="text"
                 id="username"
                 name="username"
@@ -66,13 +63,11 @@ function LogIn(props) {
               />
             </div>
           </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password">
-                Password:{" "}
-              </label>
+          <div>
+            <div>
+              <label htmlFor="password">Password: </label>
             </div>
-            <div className="col-3 col-mr-auto">
+            <div>
               <input
                 className="form-input"
                 placeholder="password"
@@ -85,11 +80,7 @@ function LogIn(props) {
           </div>
           <div className="form-group ">
             <div className="col-7"></div>
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
-              onClick={handleSubmit}
-              type="submit"
-            >
+            <button onClick={handleSubmit} type="submit">
               Login
             </button>
           </div>

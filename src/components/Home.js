@@ -8,6 +8,7 @@ function Home(props) {
     return (
       <div className="homePge">
         <ResultsContainer
+          findGenre={props.findGenre}
           resRender={props.resRender}
           handler={props.handler}
           targetID={props.targetID}

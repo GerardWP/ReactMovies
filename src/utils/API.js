@@ -14,11 +14,11 @@ export default {
     return axios.get(
       `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=en-US&append_to_response=videos,images,similar,credits,recommendations`
     );
+  },
+  findGenre: (id, page, type) => {
+    console.log("findGenre function, running...");
+    return axios.get(
+      `https://api.themoviedb.org/3/discover/${type}?api_key=${key}&page=${page}?language=en-US&include_adult=false&with_genres=${id}`
+    );
   }
 };
-
-// add this to the end of query to stop adult rated stuff getting through.
-// &include_adult=false
-// `https://api.themoviedb.org/3/search/${param}?api_key=${key}&language=en-US&query=${query}&page=1`
-
-// https://api.themoviedb.org/3/movie/157336?api_key={api_key}&append_to_response=videos,images
