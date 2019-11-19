@@ -1,15 +1,24 @@
 body {
   background-color: #282c34;
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App {
   overflow-x: hidden;
   overflow-y: hidden;
-  text-align: center;
+  flex: 1;
+  height: 100%;
 }
 
 .App-logo {
   height: 40vmin;
+  height: 100vh;
 }
 
 .appHeader {
@@ -19,7 +28,7 @@ body {
   align-items: center;
   justify-content: space-between;
   color: white;
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   z-index: 500;
   height: 70px;
@@ -101,9 +110,12 @@ h5 span {
 }
 .homePge {
   /* background: #eee; */
-  height: 100vh;
-  /* transform: translateY(30px); */
-  margin-top: 120px;
+  min-height: 100%;
+  overflow-y: scroll;
+  height: 100%;
+
+  /* transform: translateY(50px); */
+  /* margin-top: 120px; */
   /* padding: 15px; */
 }
 
@@ -114,7 +126,7 @@ h5 span {
 }
 
 .searchBar {
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   left: 0;
   top: 30px;
@@ -208,6 +220,7 @@ h5 span {
 }
 
 #predictive {
+  z-index: 500;
   padding: 0;
   list-style: none;
   width: 100%;
@@ -217,7 +230,6 @@ h5 span {
   max-height: 245px;
   overflow-y: scroll;
   background: rgba(26, 27, 27, 0.886);
-  z-index: 100;
 }
 
 h6 {
@@ -259,19 +271,98 @@ h4 {
 
 #resultContainer {
   display: flex;
-  margin: 120px 0 0;
   overflow-x: scroll;
-  height: 100vh;
-  background: lightgrey;
-}
-#resultContainer div {
-  backdrop-filter: brightness(0.6);
-  padding: 2rem;
-  width: 100%;
+  height: 100%;
 }
 
-#resultContainer div h1 {
-  margin: 0 0 10px;
+#resultContainer h1 {
+  margin: 0;
+  font-size: 3.5em;
+  text-align: left;
+  color: #ffffffde;
+}
+
+.resMainInfo {
+  display: flex;
+  flex: 1;
+  backdrop-filter: brightness(0.5);
+  padding: 2rem;
+}
+
+.resMainInfo div.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0rem 2rem 0 0 !important;
+}
+
+.resMainInfo div.header p {
+  color: rgb(235, 235, 235);
+  margin: 6px 0 0;
+  line-height: 1.3em;
+}
+
+.mainGenre {
+  color: #eee;
+  background: #ffffff33;
+  padding: 6px 20px;
+  font-size: 0.7em;
+  margin: 5px 20px 3px 0;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.mainGenreList {
+  display: flex;
+}
+
+.aside {
+  min-width: 300px;
+  backdrop-filter: brightness(0.5);
+  padding: 2rem 2rem 2rem 0;
+}
+
+.aside ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0;
+}
+
+.credits {
+  background: #ffffff33;
+  display: flex;
+  margin-bottom: 10px;
+  border-radius: 0px;
+  /* padding: 10px; */
+}
+
+.credits h6:nth-of-type(1) {
+  font-size: 1.2em;
+  margin-top: 6px;
+  margin-bottom: 3px;
+  color: rgba(255, 255, 255, 0.884);
+}
+
+.credits h6:nth-of-type(2) {
+  font-size: 0.7em;
+  letter-spacing: 0.04em;
+  /* font-weight: lighter; */
+  color: #cfcfcfd2;
+}
+
+.credits div {
+  display: flex;
+  flex-direction: column;
+}
+img.featImg {
+  max-width: 220px;
+  max-height: 331px;
+  border-radius: 6px;
+  margin-right: 20px;
+  border: solid 1px #ffffff88;
+  box-shadow: 0px 0px 4px rgba(17, 22, 31, 0.542);
 }
 
 #relatedRes {
@@ -279,7 +370,7 @@ h4 {
   flex-flow: row wrap;
   width: 100%;
   background: yellow;
-  margin: 50px 0 0 0;
+  margin: 0;
   /* overflow-x: auto; */
   /* overflow-x: hidden; */
   /* overflow-y: hidden;

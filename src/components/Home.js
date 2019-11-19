@@ -4,7 +4,7 @@ import ResultsContainer from "./ResultsContainer";
 function Home(props) {
   console.log("home props");
   console.log(props);
-  if (props.loggedIn && props.resRender.length > 0) {
+  if (props.loggedIn && props.resRender.results.length > 0) {
     return (
       <div className="homePge">
         <ResultsContainer

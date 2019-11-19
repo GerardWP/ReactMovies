@@ -20,7 +20,7 @@ function Main() {
   const [username, setUsername] = useState(null);
   const [loggedIn, setLogin] = useState(false);
   const [results, setResults] = useState([]);
-  const [resRender, setResRender] = useState([]);
+  const [resRender, setResRender] = useState({ type: "generic", results: [] });
   const [placeholder, setPlaceholder] = useState("Search");
 
   const handler = (type, id) => {
@@ -28,7 +28,7 @@ function Main() {
   };
 
   const clearRes = () => {
-    setResRender([]);
+    setResRender({ type: "generic", results: [] });
   };
 
   //  Value from Search input
@@ -46,11 +46,11 @@ function Main() {
     API.findGenre(id, page, type)
       .then(res => {
         if (res.data.results.length > 0) {
-          let genreObj = res.data.results.map(res => ({
+          let genreArr = res.data.results.map(res => ({
             ...res,
             media_type: type
           }));
-          setResRender(genreObj);
+          setResRender({ type: "generic", results: genreArr });
         } else {
           setQuery("");
           setPlaceholder("Sorry, No results Found");
@@ -79,7 +79,7 @@ function Main() {
       .then(res => {
         console.log("it worked");
         console.log(res);
-        setResRender([res.data]);
+        setResRender({ type: "target", results: [res.data] });
       })
       .catch(err => console.log(err));
   };
@@ -134,7 +134,9 @@ function Main() {
               onChange={searchQuery} // input goes to state
               onKeyDown={e =>
                 e.key === "Enter"
-                  ? (e.preventDefault(), setQuery(""), setResRender(results))
+                  ? (e.preventDefault(),
+                    setQuery(""),
+                    setResRender({ type: "generic", results: results }))
                   : null
               }
             />
