@@ -9,10 +9,15 @@ function ResultsContainer(props) {
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center top",
-      backgroundColor: "#222"
+      backgroundColor: "#222",
+      backgroundAttachment: "fixed"
     }
   };
   let bgStyle;
+
+  const numberWithCommas = num => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   if (props.resRender.type === "target") {
     results = results[0];
@@ -35,17 +40,26 @@ function ResultsContainer(props) {
             alt=""
           />
           <div className="header">
-            {results.vote_average ? (
-              <StarRatings
-                rating={results.vote_average}
-                starRatedColor="#4fdffc"
-                numberOfStars={10}
-                name="rating"
-                starDimension="20px"
-                starSpacing="1.5px"
-              />
-            ) : null}
             <h1>{results.title || results.name}</h1>
+            {results.vote_average ? (
+              <>
+                <div className="voteRating">
+                  <p>
+                    {results.vote_average}
+                    <span>/10</span>
+                  </p>
+                  <p>{numberWithCommas(results.vote_count)} Votes</p>
+                </div>
+                <StarRatings
+                  rating={results.vote_average}
+                  starRatedColor="#4fdffc"
+                  numberOfStars={10}
+                  name="rating"
+                  starDimension="20px"
+                  starSpacing="1.5px"
+                />
+              </>
+            ) : null}
             <span className="mainGenreList">
               {genreKnown.map(item => {
                 if (results.genres) {
@@ -61,12 +75,21 @@ function ResultsContainer(props) {
           </div>
         </div>
         <div className="aside">
+          <h2>Cast</h2>
           <ul>
             {results.credits.cast.map(x => {
               return (
-                <li className="credits">
+                <li
+                  key={x.id}
+                  className="credits"
+                  onClick={() => props.handler("person", x.id)}
+                  tabIndex="0"
+                  onKeyDown={e =>
+                    e.key === "Enter" ? props.handler("person", x.id) : null
+                  }
+                >
                   <img
-                    src={`http://image.tmdb.org/t/p/w45/${x.profile_path}`}
+                    src={`http://image.tmdb.org/t/p/w185/${x.profile_path}`}
                     alt=""
                   />
                   <div>
@@ -78,6 +101,7 @@ function ResultsContainer(props) {
             })}
           </ul>
         </div>
+        <div className="related"></div>
       </div>
     );
   } else {
