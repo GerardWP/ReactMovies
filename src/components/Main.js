@@ -77,8 +77,8 @@ function Main() {
   const findSelect = (type, id) => {
     API.findChoice(id, type)
       .then(res => {
-        console.log("it worked");
-        console.log(res);
+        console.log("it worked - type");
+        console.log(res.data.type);
         setResRender({ type: "target", results: [res.data] });
       })
       .catch(err => console.log(err));
