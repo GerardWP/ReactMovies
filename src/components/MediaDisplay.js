@@ -276,6 +276,56 @@ function MediaDisplay(props) {
             </ul>
           </div>
         ) : null}
+        {results.similar ? (
+          <div className="collection">
+            <h2>Recommended:</h2>
+            <ul>
+              {results.similar.results.map(item => {
+                return (
+                  <li
+                    key={item.id}
+                    style={
+                      item.poster_path
+                        ? {
+                            ...style.bg,
+                            backgroundImage: `url(http://image.tmdb.org/t/p/original/${item.poster_path})`
+                          }
+                        : {
+                            ...style.bg,
+                            backgroundImage: `url(${blankPoster})`
+                          }
+                    }
+                    onClick={() => {
+                      props.handler(results.title ? "movie" : "tv", item.id);
+                    }}
+                    tabIndex="0"
+                    onKeyDown={e =>
+                      e.key === "Enter"
+                        ? props.handler(results.title ? "movie" : "tv", item.id)
+                        : null
+                    }
+                  >
+                    <div>
+                      <div className="collectionDiv">
+                        <span>{item.title || item.name}</span>
+                        {item.vote_average ? (
+                          <StarRatings
+                            rating={item.vote_average}
+                            starRatedColor="#37b6fff3"
+                            numberOfStars={5}
+                            name="rating"
+                            starDimension="11px"
+                            starSpacing=".5px"
+                          />
+                        ) : null}
+                      </div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
       </div>
     </div>
   );

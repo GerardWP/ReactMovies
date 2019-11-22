@@ -7,6 +7,14 @@ function LogIn(props) {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+  let mainbg = require("../images/person-bg2.jpg");
+  let bgStyle = {
+    bg: {
+      background: `url(${mainbg}) center top no-repeat #222`,
+      backgroundSize: "cover"
+    }
+  };
+
   const handleChange = event => {
     const { name, value } = event.target;
     if (name === "username") {
@@ -45,13 +53,10 @@ function LogIn(props) {
     return <Redirect to="/" />;
   } else {
     return (
-      <div className="LogInForm">
+      <div className="LogInForm" style={bgStyle.bg}>
         <h2>Login</h2>
         <form>
           <div>
-            <div>
-              <label htmlFor="username">Username</label>
-            </div>
             <div>
               <input
                 type="text"
@@ -65,12 +70,9 @@ function LogIn(props) {
           </div>
           <div>
             <div>
-              <label htmlFor="password">Password: </label>
-            </div>
-            <div>
               <input
                 className="form-input"
-                placeholder="password"
+                placeholder="Password"
                 type="password"
                 name="password"
                 value={password}

@@ -1,5 +1,12 @@
 import React from "react";
 import ResultsContainer from "./ResultsContainer";
+let mainbg = require("../images/person-bg2.jpg");
+let bgStyle = {
+  bg: {
+    background: `url(${mainbg}) center top no-repeat #222`,
+    backgroundSize: "cover"
+  }
+};
 
 function Home(props) {
   console.log("home props");
@@ -16,10 +23,21 @@ function Home(props) {
         />
       </div>
     );
+  } else if (props.loggedIn && props.resRender.results.length === 0) {
+    return (
+      <div className="homePge" style={bgStyle.bg}>
+        <h1 className="homeh1">Hello, {props.user} 😎🍿</h1>
+        <h1>Happy Browsing!</h1>
+      </div>
+    );
   } else {
     return (
-      <div className="homePge">
-        <h1>Homepage.</h1>
+      <div className="homePge" style={bgStyle.bg}>
+        <h1 className="homeh1">
+          <span role="img">🍿</span> Welcome to the MovieDb!{" "}
+          <span role="img">🍿</span>
+        </h1>
+        <h5>Please Sign Up or Log In to continue</h5>
       </div>
     );
   }
