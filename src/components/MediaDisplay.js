@@ -13,8 +13,7 @@ function MediaDisplay(props) {
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center top",
-      backgroundColor: "#222",
-      backgroundAttachment: "fixed"
+      backgroundColor: "#222"
     }
   };
 
@@ -36,12 +35,20 @@ function MediaDisplay(props) {
   }
 
   function toHours(n) {
-    var num = n;
-    var hours = num / 60;
-    var rhours = Math.floor(hours);
-    var minutes = (hours - rhours) * 60;
-    var rminutes = Math.round(minutes);
-    return rhours + " hour(s) and " + rminutes + " minute(s).";
+    let hourString = " hours and ";
+    let minuteString = " minutes.";
+    let num = n;
+    let hours = num / 60;
+    let rhours = Math.floor(hours);
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+    if (rhours === 1) {
+      hourString = " hour and ";
+    }
+    if (rminutes === 1) {
+      minuteString = " minute.";
+    }
+    return rhours + hourString + rminutes + minuteString;
   }
 
   const numberWithCommas = num => {
@@ -51,7 +58,8 @@ function MediaDisplay(props) {
   let bgStyle = results.backdrop_path
     ? {
         ...style.bg,
-        backgroundImage: `url(http://image.tmdb.org/t/p/original/${results.backdrop_path})`
+        backgroundImage: `url(http://image.tmdb.org/t/p/original/${results.backdrop_path})`,
+        backgroundAttachment: "fixed"
       }
     : style.bg;
 
@@ -80,6 +88,10 @@ function MediaDisplay(props) {
             {results.runtime ? (
               <p>
                 Runtime: <span>{toHours(results.runtime)}</span>
+              </p>
+            ) : results.seasons ? (
+              <p>
+                <span>{results.seasons.length} Seasons</span>
               </p>
             ) : null}
           </div>
@@ -182,45 +194,84 @@ function MediaDisplay(props) {
             <h2>In this collection:</h2>
             <ul>
               {collection.map(item => {
-                return item.title !== results.title ? (
-                  <li key={item.id}>
+                return (
+                  <li
+                    key={item.id}
+                    style={
+                      item.poster_path
+                        ? {
+                            ...style.bg,
+                            backgroundImage: `url(http://image.tmdb.org/t/p/original/${item.poster_path})`
+                          }
+                        : {
+                            ...style.bg,
+                            backgroundImage: `url(${blankPoster})`
+                          }
+                    }
+                    onClick={() => {
+                      props.handler("movie", item.id);
+                    }}
+                    tabIndex="0"
+                    onKeyDown={e =>
+                      e.key === "Enter" ? props.handler("movie", item.id) : null
+                    }
+                  >
                     <div>
-                      <span>{item.title || item.name}</span>
-                      {item.vote_average ? (
-                        <StarRatings
-                          rating={item.vote_average}
-                          starRatedColor="#4fdffc"
-                          numberOfStars={5}
-                          name="rating"
-                          starDimension="11px"
-                          starSpacing=".5px"
-                        />
-                      ) : null}
-                      <button
-                        key={item.id}
-                        onClick={() => {
-                          props.handler(item.media_type, item.id);
-                        }}
-                        tabIndex="0"
-                        onKeyDown={e =>
-                          e.key === "Enter"
-                            ? props.handler(item.media_type, item.id)
-                            : null
-                        }
-                      >
-                        More
-                      </button>
+                      <div className="collectionDiv">
+                        <span>{item.title || item.name}</span>
+                        {item.vote_average ? (
+                          <StarRatings
+                            rating={item.vote_average}
+                            starRatedColor="#37b6fff3"
+                            numberOfStars={5}
+                            name="rating"
+                            starDimension="11px"
+                            starSpacing=".5px"
+                          />
+                        ) : null}
+                      </div>
                     </div>
-                    <img
-                      src={
-                        item.poster_path
-                          ? `http://image.tmdb.org/t/p/w185/${item.poster_path}`
-                          : blankPoster
-                      }
-                      alt=""
-                    />
                   </li>
-                ) : null;
+                );
+              })}
+            </ul>
+          </div>
+        ) : results.seasons ? (
+          <div className="seasons">
+            <h2>Seasons:</h2>
+            <ul>
+              {results.seasons.map(item => {
+                return (
+                  <li
+                    key={item.id}
+                    style={
+                      item.poster_path
+                        ? {
+                            ...style.bg,
+                            backgroundImage: `url(http://image.tmdb.org/t/p/original/${item.poster_path})`
+                          }
+                        : {
+                            ...style.bg,
+                            backgroundImage: `url(${blankPoster})`
+                          }
+                    }
+                  >
+                    <div>
+                      <div className="seasonsDiv">
+                        <span>{item.title || item.name}</span>
+                        {item.episode_count ? (
+                          <p>
+                            <span>{item.episode_count}</span>
+                            {item.episode_count === 1
+                              ? " Episode"
+                              : " Episodes"}
+                          </p>
+                        ) : null}
+                        {item.air_date ? <p>{item.air_date}</p> : null}
+                      </div>
+                    </div>
+                  </li>
+                );
               })}
             </ul>
           </div>

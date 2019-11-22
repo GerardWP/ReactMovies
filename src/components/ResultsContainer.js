@@ -7,6 +7,8 @@ import MediaDisplay from "./MediaDisplay";
 // let blankProfile = require("../images/blank-profile.svg");
 function ResultsContainer(props) {
   let results = props.resRender.results;
+  console.log("rend object");
+  console.log(results);
 
   if (props.resRender.type === "target") {
     results = results[0];
