@@ -12,13 +12,19 @@ export default {
   findChoice: (id, type) => {
     console.log("findChoice function, running...");
     return axios.get(
-      `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=en-US&append_to_response=videos,images,similar,credits,recommendations`
+      `https://api.themoviedb.org/3/${type}/${id}?api_key=${key}&language=en-US&append_to_response=videos,images,similar,credits,recommendations,combined_credits`
     );
   },
   findGenre: (id, page, type) => {
     console.log("findGenre function, running...");
     return axios.get(
       `https://api.themoviedb.org/3/discover/${type}?api_key=${key}&page=${page}?language=en-US&include_adult=false&with_genres=${id}`
+    );
+  },
+  getCollection: id => {
+    console.log("getCollection function, running...");
+    return axios.get(
+      `https://api.themoviedb.org/3/collection/${id}?api_key=${key}&language=en-US`
     );
   }
 };

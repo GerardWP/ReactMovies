@@ -1,39 +1,38 @@
 import React from "react";
 import SearchDisplay from "./SearchDisplay";
-
+import MediaDisplay from "./MediaDisplay";
+import PersonDisplay from "./PersonDisplay";
+// import StarRatings from "react-star-ratings";
+// // let blankPoster = require("../images/blank.svg");
+// let blankProfile = require("../images/blank-profile.svg");
 function ResultsContainer(props) {
-  let results = props.resRender;
-  let style = {
-    bg: {
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center top",
-      backgroundColor: "#222"
-    }
-  };
-  let bgStyle;
+  let results = props.resRender.results;
+  console.log("rend object");
+  console.log(results);
 
-  if (results.length === 1) {
+  if (props.resRender.type === "target") {
     results = results[0];
-    results.backdrop_path
-      ? (bgStyle = {
-          ...style.bg,
-          backgroundImage: `url(http://image.tmdb.org/t/p/w1280/${results.backdrop_path})`
-        })
-      : (bgStyle = style.bg);
-    console.log(results);
-    console.log(bgStyle);
-    return (
-      <div id="resultContainer" style={bgStyle}>
-        <div>
-          <div key={results.id} id="target">
-            <h1>{results.title || results.name}</h1>
-            <h2>Main</h2>
-            <span onClick={() => console.log(results.id)}>click</span>
-          </div>
-        </div>
-      </div>
-    );
+    if (results.known_for_department) {
+      return (
+        <PersonDisplay
+          findGenre={props.findGenre}
+          results={results}
+          handler={props.handler}
+          genres={props.genres}
+        />
+      );
+    } else {
+      return (
+        <MediaDisplay
+          findGenre={props.findGenre}
+          results={results}
+          handler={props.handler}
+          genres={props.genres}
+          collection={props.collection}
+          findCollection={props.findCollection}
+        />
+      );
+    }
   } else {
     return (
       <SearchDisplay

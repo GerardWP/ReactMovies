@@ -33,7 +33,7 @@ function SearchDisplay(props) {
               {res.vote_average ? (
                 <StarRatings
                   rating={res.vote_average}
-                  starRatedColor="#4fdffc"
+                  starRatedColor="#37b6fff3"
                   numberOfStars={10}
                   name="rating"
                   starDimension="15px"
@@ -78,7 +78,7 @@ function SearchDisplay(props) {
                         {item.vote_average ? (
                           <StarRatings
                             rating={item.vote_average}
-                            starRatedColor="#4fdffc"
+                            starRatedColor="#37b6fff3"
                             numberOfStars={5}
                             name="rating"
                             starDimension="11px"

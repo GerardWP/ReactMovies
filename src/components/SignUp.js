@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
+let mainbg = require("../images/person-bg2.jpg");
+let bgStyle = {
+  bg: {
+    background: `url(${mainbg}) center top no-repeat #222`,
+    backgroundSize: "cover"
+  }
+};
 
 function SignUp() {
   const [username, updateUsername] = useState("");
@@ -55,7 +62,7 @@ function SignUp() {
     return <Redirect to="/" />;
   } else {
     return (
-      <div className="signUpForm">
+      <div className="signUpForm" style={bgStyle.bg}>
         <h2>Sign-Up</h2>
         <span>{failedMsg}</span>
         <form id="myForm">
